@@ -55,9 +55,13 @@ console.log(user === admin); //true
 // two independent objects are not equal, even though they look alike ( eg.two different empty objects):
 let a = {};
 let b = {};
-let c = {name="Warner"};
-let d = {name="Warner"};
+let c = {
+  name: 'Warner',
+};
+let d = {
+  name: 'Warner',
+};
 
-// a and b are two independent objects
-console.log(a==b);    //false
-console.log(c==d);  
+// a, b, c and d are independent objects
+console.log(a == b); //false
+console.log(c == d); //false
