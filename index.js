@@ -41,3 +41,23 @@ admin.name = 'Peter'; //changed by the 'admin' reference
 console.log(user.name); //Peter ->changes are seen from the "user" reference
 
 console.log(admin.name); //Peter
+
+// It’s as if we had a cabinet with two keys(user and admin) and used one of them (admin) to get into it and make changes.
+// Then, if we later use another key (user), we are still opening the same cabinet and can access the changed contents.
+
+// Comparison by reference
+// *******************************************
+
+// Two objects are equal only if they are the same object.
+console.log(user == admin); //true
+console.log(user === admin); //true
+
+// two independent objects are not equal, even though they look alike ( eg.two different empty objects):
+let a = {};
+let b = {};
+let c = {name="Warner"};
+let d = {name="Warner"};
+
+// a and b are two independent objects
+console.log(a==b);    //false
+console.log(c==d);  
