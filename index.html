@@ -23,7 +23,29 @@
         object itself is not duplicated.
       </h4>
     </li>
-    <li></li>
+    <li>
+      <h3>Comparison by reference</h3>
+      <p>Two objects are equal only if they are the same object.</p>
+      <p>
+        And two independent objects are not equal, even though they look alike
+        (both are empty):
+      </p>
+    </li>
+    <li>
+      <h3>Cloning and merging, Object.assign</h3>
+      <p>
+        Copying an object variable creates one more reference to the same
+        object.
+      </p>
+      <p>How can we get a duplicate of an object?</p>
+      <ol>
+        <li>
+          create a new object and replicate the structure of the existing one by
+          iterating over its properties and copying them on the primitive level.
+        </li>
+        <li>using <code>Object.assign()</code> method</li>
+      </ol>
+    </li>
   </ul>
   <p>
     Source:
