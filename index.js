@@ -119,5 +119,70 @@ let plumber = {
 // copies all properties from labor and plumber into worker
 Object.assign(worker, labor, plumber);
 
-console.log(worker);  //{name: "Jennifer", isExperienced: true, isTrained: true}
+console.log(worker); //{name: "Jennifer", isExperienced: true, isTrained: true}
 
+// Clone objects using spread Syntax
+// ------------------------------------------
+
+let cloneBySpread = { ...worker, ...labor, ...plumber };
+console.log(cloneBySpread); //{name: "Jennifer", isExperienced: true, isTrained: true}
+
+// Nested cloning
+// ------------------------------------------
+
+// In nested objects, properties can be references to other objects.
+let yuser = {
+  name: 'John',
+  sizes: {
+    height: 182,
+    width: 50,
+  },
+};
+
+console.log(yuser.sizes.height); //182
+
+// Let's try to clone nested object:
+let copyYuser = {};
+copyYuser.sizes = yuser.sizes;
+
+// Since 'yuser.sizes' is an object, it is not enough to clone nested objects because it will be copied by reference. i.e. 'myClone' and 'yuser' will share the same sizes.
+
+copyYuser = Object.assign({}, yuser);
+console.log(copyYuser.sizes === yuser.sizes); //true ->same object
+//Again change a property from one place and check from other one.
+yuser.sizes.width = 105;
+console.log(copyYuser.sizes.width); //105 ->indicates same object
+
+// So, what to do with them?
+// Here it comes a 'deep cloning'.
+// To fix that, we should use a cloning loop that examines each value of yuser[key] and, it it's an object, then replicate its structure as well.
+
+//let's check if something is an object or not?
+function isObject(obj) {
+  return obj === Object(obj);
+}
+
+// console.log(isObject(yuser.sizes)); //true ->sizes is an object
+// console.log(isObject(yuser.name)); //false; ->name is not an object.
+let myClone = {};
+for (let key in yuser) {
+  // console.log("is object?", isObject(yuser[key]));
+  if (!isObject(yuser[key])) {
+    console.log(isObject(yuser[key]));
+    myClone[key] = yuser[key];
+  } else {
+   myClone[key] = {};
+    for (let prop in yuser[key]) {
+    //  console.log(prop);
+     myClone[key][prop]  = yuser[key][prop];
+    }
+  }
+}
+
+console.log(myClone); //{name: "John", sizes: {height: 182, width: 105}}
+// is object? false
+// is object? true
+
+console.log(myClone === yuser); //false;
+console.log(myClone['sizes'] === yuser['sizes']); //false
+console.log(myClone['sizes']);  // {height: 182, width: 105}
